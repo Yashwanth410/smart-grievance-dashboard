@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #e9f0ff, #fdfefe);
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    background: linear-gradient(180deg, #1e1e2f, #2a2a40);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.logo {
+    background: #00ffd0;
+    color: #003333;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    color: white;
+    font-size: 20px;
+    margin: 25px 0;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+    opacity: 1;
+}
+
+/* Main */
+.main {
+    flex: 1;
+    padding: 30px 40px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.topbar p {
+    color: #555;
+    margin-top: 4px;
+}
+
+/* Content */
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+/* Form */
+label {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #00ffd0, #00bfa6);
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Output */
+.output-card p {
+    margin: 10px 0;
+}
+
+.priority-high { color: #ff4d4d; font-weight: bold; }
+.priority-medium { color: #ffae00; font-weight: bold; }
+.priority-normal { color: #00bfa6; font-weight: bold; }
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartGrievance Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">SG</div>
+        <ul>
+            <li class="active">🏠</li>
+            <li>📝</li>
+            <li>📊</li>
+            <li>⚙️</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <header class="topbar">
+            <h1>Dashboard</h1>
+            <p>Civic Grievance Tracking System</p>
+        </header>
+
+        <section class="content">
+
+            <!-- Form Card -->
+            <div class="card">
+                <h2>Submit a Civic Issue</h2>
+
+                <form id="complaintForm">
+                    <label>Issue Title</label>
+                    <input type="text" id="title" placeholder="Eg: Pothole near hostel" required>
+
+                    <label>Description</label>
+                    <textarea id="description" rows="4" required></textarea>
+
+                    <label>Category</label>
+                    <select id="category">
+                        <option value="Road">Road</option>
+                        <option value="Water">Water</option>
+                        <option value="Electricity">Electricity</option>
+                        <option value="Garbage">Garbage</option>
+                    </select>
+
+                    <button type="submit">Submit Complaint</button>
+                </form>
+            </div>
+
+            <!-- AI Output Card -->
+            <div id="output" class="card output-card">
+                <h2>AI Decision (MUSE-Inspired)</h2>
+                <p>Submit an issue to see priority & reasoning.</p>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyBVH8raQWfV7EPEDnAzjpnlwb-tPR15Au0",
+        authDomain: "smartgrievance-39e99.firebaseapp.com",
+        projectId: "smartgrievance-39e99",
+        storageBucket: "smartgrievance-39e99.appspot.com",
+        messagingSenderId: "236472218332",
+        appId: "1:236472218332:web:53316f9a382f540da0ba19"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+</script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
+
