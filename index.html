@@ -17,7 +17,6 @@
             <li class="active">🏠</li>
             <li>📝</li>
             <li>📊</li>
-            <li>⚙️</li>
         </ul>
     </aside>
 
@@ -25,22 +24,24 @@
     <main class="main">
 
         <header class="topbar">
-            <h1>Dashboard</h1>
-            <p>Civic Grievance Tracking System</p>
+            <div>
+                <h1>Dashboard</h1>
+                <p>Civic Grievance Tracking System</p>
+            </div>
+            <button id="themeToggle" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
         </header>
 
-        <section class="content">
-
+        <section class="content" id="dashboardView">
             <!-- Form Card -->
             <div class="card">
                 <h2>Submit a Civic Issue</h2>
 
                 <form id="complaintForm">
                     <label>Issue Title</label>
-                    <input type="text" id="title" placeholder="Eg: Pothole near hostel" required>
+                    <input type="text" id="title" placeholder="Enter issue title..." required>
 
                     <label>Description</label>
-                    <textarea id="description" rows="4" required></textarea>
+                    <textarea id="description" rows="4" placeholder="Describe the issue in detail..." required></textarea>
 
                     <label>Category</label>
                     <select id="category">
@@ -48,7 +49,35 @@
                         <option value="Water">Water</option>
                         <option value="Electricity">Electricity</option>
                         <option value="Garbage">Garbage</option>
+                        <option value="Sewage">Sewage</option>
+                        <option value="Internet">Internet</option>
+                        <option value="Street Light">Street Light</option>
+                        <option value="Security">Security</option>
+                        <option value="Health">Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Park">Park</option>
                     </select>
+                    
+                    <label>Priority Level</label>
+                    <select id="priorityLevel">
+                        <option value="NORMAL">Normal</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                        <option value="URGENT">Urgent</option>
+                    </select>
+
+                    <label>Upload Image (Optional)</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="imageUpload" accept="image/jpeg,image/png,image/jpg" style="display: none;">
+                        <label for="imageUpload" class="image-upload-label">
+                            <span id="imageUploadText">📷 Choose Image (JPG/PNG)</span>
+                        </label>
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" src="" alt="Preview">
+                            <button type="button" id="removeImage" class="remove-image-btn">✕</button>
+                        </div>
+                    </div>
 
                     <button type="submit">Submit Complaint</button>
                 </form>
@@ -58,9 +87,47 @@
             <div id="output" class="card output-card">
                 <h2>AI Decision (MUSE-Inspired)</h2>
                 <p>Submit an issue to see priority & reasoning.</p>
+                <p class="ai-explanation" style="display: none; margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); font-style: italic;">
+                    Priority is dynamically assigned by learning from past complaint frequency and patterns.
+                </p>
             </div>
-
         </section>
+
+        <!-- Submissions History View -->
+        <section class="content submissions-view" id="submissionsView" style="display: none;">
+            <div class="card full-width-card">
+                <div class="submissions-header">
+                    <h2>📝 Stored Submissions</h2>
+                    <button id="refreshSubmissions" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div id="submissionsList" class="submissions-list">
+                    <div class="loading-spinner"></div>
+                    <p>Loading submissions...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics View -->
+        <section class="content analytics-view" id="analyticsView" style="display: none;">
+            <div class="card full-width-card">
+                <div class="analytics-header">
+                    <h2>📊 Analytics Dashboard</h2>
+                    <button id="refreshAnalytics" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div id="analyticsContent" class="analytics-content">
+                    <div class="loading-spinner"></div>
+                    <p>Loading analytics...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Lightbox Modal -->
+        <div id="imageModal" class="image-modal" style="display: none;">
+            <div class="image-modal-content">
+                <span class="image-modal-close">&times;</span>
+                <img id="modalImage" src="" alt="Full size image">
+            </div>
+        </div>
 
     </main>
 </div>
@@ -68,6 +135,7 @@
 <!-- Firebase v8 -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
 <script>
     var firebaseConfig = {
@@ -80,7 +148,11 @@
     };
     firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
+    var storage = firebase.storage(); // Firebase Storage for image uploads
 </script>
+
+<!-- Chart.js for Analytics -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <script src="app.js"></script>
 
