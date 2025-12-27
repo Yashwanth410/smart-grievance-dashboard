@@ -1,12 +1,5 @@
 // ============================================================================
 // SMART GRIEVANCE DASHBOARD - Main Application
-// 
-// Future Integrations:
-// - Google Maps Platform: Add location picker and map visualization
-//   Example: Use Google Maps API to let users select complaint location
-//   and display complaints on an interactive map
-// - BigQuery: Advanced analytics and ML predictions
-//   Example: Export Firestore data to BigQuery for complex queries
 // ============================================================================
 
 let complaintHistory = [];
@@ -24,11 +17,8 @@ let analyticsCharts = [];
 
 // ============================================================================
 // AI-INSPIRED LOGIC (MUSE Framework)
-// This section implements adaptive priority assignment based on complaint history
-// Future: Can be enhanced with BigQuery for advanced pattern recognition
 // ============================================================================
-
-// Form submission function
+//function
 function submitForm() {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
@@ -45,8 +35,6 @@ function submitForm() {
     const count = complaintHistory.filter(c => c === category).length;
 
     // ===== AI-INSPIRED PRIORITY LOGIC =====
-    // Uses pattern recognition from complaint history to dynamically adjust priority
-    // Future enhancement: Integrate with BigQuery for ML-based predictions
     let priority = priorityLevel;
     let reason = "User specified priority level.";
 
@@ -58,7 +46,6 @@ function submitForm() {
         priority = "MEDIUM";
         reason = "Similar issue reported earlier. Priority adjusted.";
     }
-    // ===== END AI-INSPIRED LOGIC =====
 
     let cls =
         priority === "HIGH" || priority === "URGENT" ? "priority-high priority-badge" :
@@ -75,8 +62,6 @@ function submitForm() {
 
     // ============================================================================
     // FIREBASE STORAGE: Image Upload Handler
-    // Uploads image to Firebase Storage and gets download URL
-    // Future: Can add image compression, multiple images, or video support
     // ============================================================================
     const uploadImagePromise = imageFile 
         ? uploadImageToStorage(imageFile) 
@@ -141,8 +126,6 @@ function submitForm() {
 
 // ============================================================================
 // FIREBASE STORAGE: Image Upload Function
-// Handles secure image upload to Firebase Storage
-// Returns promise with download URL
 // ============================================================================
 function uploadImageToStorage(imageFile) {
     // Validate file type
@@ -189,7 +172,6 @@ form.addEventListener("submit", function (e) {
         submitForm();
     }
 });
-
 // Keyboard shortcuts
 document.addEventListener("keydown", function(e) {
     // Ctrl/Cmd + Enter to submit form
@@ -240,7 +222,7 @@ document.addEventListener("keydown", function(e) {
         }
     }
 
-    // Arrow keys for sidebar navigation
+    // Arrow keys
     if ((e.key === "ArrowUp" || e.key === "ArrowDown") && !e.ctrlKey && !e.metaKey) {
         const target = document.activeElement;
         if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA" && target.tagName !== "SELECT") {
@@ -258,7 +240,7 @@ document.addEventListener("keydown", function(e) {
 
 });
 
-// Sidebar click handlers
+// Sidebar click
 sidebarItems.forEach((item, index) => {
     item.addEventListener("click", function() {
         sidebarItems.forEach(i => i.classList.remove("active"));
@@ -268,7 +250,7 @@ sidebarItems.forEach((item, index) => {
     });
 });
 
-// Navigation function
+// Navigation
 function navigateToView(index) {
     if (index === 0) {
         // Home/Dashboard view
@@ -290,7 +272,7 @@ function navigateToView(index) {
     }
 }
 
-// Real-time listener for submissions
+// Real-time listener
 let unsubscribeSubmissions = null;
 
 // Load submissions from Firestore with real-time updates
